@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>WASM MD5 Example</title>
+</head>
+<body>
+    <form>
+        <input id="image" type="file" name="image" accept="image/*">
+    </form>
+    <pre><code id="checksum"></code></pre>
+    <script type="module">
+        import init, { calculate_md5 } from "./pkg/rust_md5.js";
+        const assert = (val, msg = 'Assertion Error') => {
+            if (!val) throw new Error(msg)
+        }
+        init()
+            .then(() => {
+                const utf8Encode = new TextEncoder();
+                const checksum = calculate_md5(utf8Encode.encode('abc'));
+                assert('900150983cd24fb0d6963f7d28e17f72' === checksum, 'Checksum mismatch');
+                const imageInput = document.getElementById('image');
+                const checksumOutput = document.querySelector('#checksum');
+                // display file name if file has been selected
+                imageInput.onchange = async function () {
+                    const input = this.files[0];
+                    const checksum = calculate_md5(new Uint8Array(await input.arrayBuffer()));
+                    const checksumStr = `MD5 = ${checksum}\n`;
+                    console.log(checksumStr);
+                    checksumOutput.textContent += checksumStr;
+                };
+            });
+    </script>
+</body>
+</html>
