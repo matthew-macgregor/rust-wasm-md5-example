@@ -13,3 +13,5 @@ could also run this with the Python 3 development server: `python3 -m http.serve
 are on Windows you might need to set the ContentType to `application/js` in the registry as
 described here: https://bugs.python.org/issue43975
 
+# TODO
+- Use WebWorkers.

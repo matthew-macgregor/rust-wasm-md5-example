@@ -6,7 +6,7 @@
 </head>
 <body>
     <form>
-        <input id="image" type="file" name="image" accept="image/*">
+        <input id="file" type="file" name="file" accept="*">
     </form>
     <pre><code id="checksum"></code></pre>
     <script type="module">
@@ -16,16 +16,17 @@
         }
         init()
             .then(() => {
+                // Test: abc => 900150983cd24fb0d6963f7d28e17f72
                 const utf8Encode = new TextEncoder();
                 const checksum = calculate_md5(utf8Encode.encode('abc'));
                 assert('900150983cd24fb0d6963f7d28e17f72' === checksum, 'Checksum mismatch');
-                const imageInput = document.getElementById('image');
+                // File Input
+                const imageInput = document.getElementById('file');
                 const checksumOutput = document.querySelector('#checksum');
-                // display file name if file has been selected
                 imageInput.onchange = async function () {
                     const input = this.files[0];
                     const checksum = calculate_md5(new Uint8Array(await input.arrayBuffer()));
-                    const checksumStr = `MD5 = ${checksum}\n`;
+                    const checksumStr = `MD5 (${input.name}) = ${checksum}\n`;
                     console.log(checksumStr);
                     checksumOutput.textContent += checksumStr;
                 };
