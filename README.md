@@ -5,7 +5,9 @@ passed in from JavaScript and using Rust/Wasm to process it.
 
 1. Install `Rust` and `Cargo` in order to build the project.
 2. Install `wasm-pack`: `cargo install wasm-pack`.
-3. `wasm-pack build --target web`
+3. `wasm-pack build --target web --release`
+4. Run tests: `wasm-pack test --node`
+5. Pack: `wasm-pack pack`
 
 You will need to run a local webserver that properly handles the `application/wasm` mimetype.
 Personally, I use the PHP development server: `php -S localhost:8080`, which works fine. You
