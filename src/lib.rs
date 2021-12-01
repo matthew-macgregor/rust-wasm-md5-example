@@ -57,13 +57,38 @@ mod tests {
 
     extern crate wasm_bindgen_test;
     use wasm_bindgen_test::*;
-    use crate::{hex_to_base64, base64_to_hex};
+    use crate::{hex_to_base64, base64_to_hex, calculate_md5_hex, calculate_md5_base64, calculate_md5};
+    use crate::{BASE_64, HEX};
 
     #[wasm_bindgen_test]
-    fn test_hex_base64_conversion() {
-        let b64 = hex_to_base64(&"FC3FF98E8C6A0D3087D515C0473F8677".to_ascii_lowercase());
-        assert_eq!("/D/5joxqDTCH1RXARz+Gdw==", b64);
-        let hex = base64_to_hex(&b64);
-        assert_eq!("FC3FF98E8C6A0D3087D515C0473F8677".to_ascii_lowercase(), hex);
+    fn test_calculate_md5() {
+        let b64 = calculate_md5(b"123abc", BASE_64);
+        assert_eq!("qQZEnVdp+nNh1+zGqj9tKA==", b64);
+        let hex = calculate_md5(b"123abc", HEX);
+        assert_eq!("a906449d5769fa7361d7ecc6aa3f6d28", hex);
+    }
+
+    #[wasm_bindgen_test]
+    fn test_hex_to_base64() {
+        let b64 = hex_to_base64("a906449d5769fa7361d7ecc6aa3f6d28");
+        assert_eq!("qQZEnVdp+nNh1+zGqj9tKA==", b64);
+    }
+
+    #[wasm_bindgen_test]
+    fn test_base64_to_hex() {
+        let hex = base64_to_hex("qQZEnVdp+nNh1+zGqj9tKA==");
+        assert_eq!("a906449d5769fa7361d7ecc6aa3f6d28", hex);
+    }
+    
+    #[wasm_bindgen_test]
+    fn test_calculate_md5_hex() {
+        let checksum_hex = calculate_md5_hex(b"123abc");
+        assert_eq!("a906449d5769fa7361d7ecc6aa3f6d28", checksum_hex);
+    }
+
+    #[wasm_bindgen_test]
+    fn test_calculate_b64_hex() {
+        let b64 = calculate_md5_base64(b"123abc");
+        assert_eq!("qQZEnVdp+nNh1+zGqj9tKA==", b64);
     }
 }
