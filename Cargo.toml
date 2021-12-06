@@ -1,5 +1,5 @@
 [package]
-name = "rust_md5"
+name = "rust-md5"
 version = "0.1.2"
 authors = [ "Matthew MacGregor <m.macgregor@gmail.com>" ]
 description = "Md5 in Rust + Web Assembly (wasm)"
