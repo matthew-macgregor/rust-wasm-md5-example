@@ -1,0 +1,23 @@
+{
+  "name": "rust-wasm-md5-example",
+  "version": "1.0.0",
+  "description": "This project provides an example of generating an MD5 hash from a byte array (`Uint8Array`)\r passed in from JavaScript and using Rust/Wasm to process it.",
+  "main": "index.js",
+  "scripts": {
+    "start": "ws --port 7333"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matthew-macgregor/rust-wasm-md5-example.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matthew-macgregor/rust-wasm-md5-example/issues"
+  },
+  "homepage": "https://github.com/matthew-macgregor/rust-wasm-md5-example#readme",
+  "devDependencies": {
+    "local-web-server": "^5.1.1"
+  }
+}
